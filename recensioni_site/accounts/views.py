@@ -14,6 +14,7 @@ def resgistrazioneView(request):
             password = form.cleaned_data["password1"]
             User.objects.create_user(username=username, password=password, email=email)
             user = authenticate(username= username, password=password)
+            proprietario = form.cleaned_data["proprietario"]
             login(request, user)
             return HttpResponseRedirect("/")
     else:
