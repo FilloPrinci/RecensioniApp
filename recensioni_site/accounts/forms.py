@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class FormRegistrazione(UserCreationForm):
     email = forms.CharField(max_length=30, required=True, widget=forms.EmailInput())
-    proprietario = forms.BooleanField
+    proprietario = forms.BooleanField(required=False)
 
     class Meta:
         model = User
