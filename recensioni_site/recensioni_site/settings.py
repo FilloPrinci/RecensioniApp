@@ -130,4 +130,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media-server')
+MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = '/'
