@@ -17,7 +17,7 @@ class Sezione(models.Model):
 class Discussione(models.Model):
     titolo = models.CharField(max_length=120)
     data_creazione = models.DateTimeField(auto_now_add=True)
-    autore = models.ForeignKey(User, on_delete=models.CASCADE, related_name="discussioni")
+    autore_discussione = models.ForeignKey(User, on_delete=models.CASCADE, related_name="discussioni")
     sezione_appartenenza = models.ForeignKey(Sezione, on_delete=models.CASCADE)
 
     def __str__(self):
