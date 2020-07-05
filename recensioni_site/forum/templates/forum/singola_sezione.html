@@ -8,6 +8,14 @@
         <div class="card-header">
             <h3>{{ sezione.nome_sezione }}</h3>
             <h6 class="card-text">{{ sezione.descrizione }}</h6>
+            {% include 'forum/risposta.html' %}
+        </div>
+    </div>
+
+    <div class="card my-3">
+        <div class="card-header">
+            <h3>{{ form_risposta.autore_post }}</h3>
+            <h6 class="">{{ form_risposta }}</h6>
         </div>
     </div>
 
