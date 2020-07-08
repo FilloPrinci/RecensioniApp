@@ -11,4 +11,12 @@
         </div>
     </div>
 
+    <div class="card body">
+        {% for discussione in discussioni%}
+            <p><a href="{{ discussione.get_absolute_url }}">{{ discussione.titolo }}</a></p>
+            <p>{{ discussione.autore_discusisone }}</p>
+        {% endfor %}
+
+    </div>
+
 {% endblock content %}

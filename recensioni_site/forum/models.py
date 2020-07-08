@@ -27,6 +27,9 @@ class Discussione(models.Model):
     def __str__(self):
         return self.titolo
 
+    def get_absolute_url(self):
+        return reverse("discussione_view", kwargs={"pk" : self.pk})
+
     class Meta:
         verbose_name = "Discussione"
         verbose_name_plural = "Discussioni"
