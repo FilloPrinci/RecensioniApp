@@ -4,19 +4,27 @@
 
 {% block content %}
 
-    <div class="card my-3">
-        <div class="card-header">
-            <h3>{{ sezione.nome_sezione }}</h3>
-            <h6 class="card-text">{{ sezione.descrizione }}</h6>
-        </div>
-    </div>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 
-    <div class="card body">
         {% for discussione in discussioni%}
-            <p><a href="{{ discussione.get_absolute_url }}">{{ discussione.titolo }}</a></p>
-            <p>{{ discussione.autore_discusisone }}</p>
+            <p><a class="goTodiscusssione text-blue" href="{{ discussione.get_absolute_url }}">{{ discussione.titolo }}</a></p>
+            <p class="text-blue">{{ discussione.autore_discusisone }}</p>
         {% endfor %}
 
-    </div>
+
+    <script>
+    //implementation for future
+    $(document).ready(function () {
+        var url= $(".goTodiscusssione:first").attr('href');
+    window.location = url;
+    });
+    </script>
+    <style>
+        .text-blue {
+            color: #17a2b8
+        }
+    </style>
 
 {% endblock content %}
