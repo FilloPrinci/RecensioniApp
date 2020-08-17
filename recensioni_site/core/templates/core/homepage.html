@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="container">
 <h1 class="text-white">HomePage</h1>
 
 {% for sezione in lista_sezioni %}
@@ -24,6 +24,7 @@
             <button onclick="location.href='{{ sezione.get_absolute_url}}'" class="btn1">Apri</button>
         </div>
     </div>
+</div>
 </div>
 {% endfor %}
 
