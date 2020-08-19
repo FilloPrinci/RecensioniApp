@@ -5,7 +5,7 @@ from django.contrib.auth.models import  User
 
 class Sezione(models.Model):
     nome_sezione = models.CharField(max_length=80)
-    descrizione = models.CharField(max_length=150, blank=True, null=True)
+    descrizione = models.TextField(default='', null=False)
     citta = models.CharField(max_length=80,default='', null=False)
     provincia = models.CharField(max_length=80,default='', null=False)
     indirizzo = models.CharField(max_length=80,default='', null=False)
@@ -29,6 +29,6 @@ class SezioneImage(models.Model):
     logo_sezione = models.ImageField(upload_to ='images/')
 
     def __str__(self):
-        return self.post.logo_sezione
+        return self.post.nome_sezione
 
     
