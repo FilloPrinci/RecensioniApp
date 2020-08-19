@@ -19,7 +19,9 @@ def homepage(request):
 
 def userProfileView(request, username):
     user = get_object_or_404(User, username=username)
-    context={"user": user}
+    sezione = Sezione.objects.filter(user=user.pk).order_by("-pk")
+    context={"user": user, "sezioni":sezione}
     return render(request, 'core/user_profile.html', context)
+
 
 
