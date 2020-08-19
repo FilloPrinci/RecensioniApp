@@ -1,0 +1,27 @@
+{%  extends 'base.html' %}
+{%  load static %}
+{% block title %}Language Delete{%  endblock %}
+
+{% block content %}
+
+<div id="login">
+    <h3 class="text-center text-white pt-5">Cancella l'Annuncio ?</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <h4>Sicuro di voler Cancellare l'annuncio ?</h4>
+                    <br>
+                    <br>
+                    <br>
+                    <form method="post">{%  csrf_token %}
+                        <input class="btn btn-info float-right" type="submit" value="Elimina">
+                        <a class="btn btn-outline-info" href="{%  url 'user_profile' username=request.user.username %}">Cancella</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#    <img src="{%  static 'img/GVFC-acc.jpg' %}">#}
+{% endblock %}

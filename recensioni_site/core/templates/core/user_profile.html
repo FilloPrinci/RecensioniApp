@@ -18,7 +18,12 @@
                         <div onclick='location.href="{{ sezione.get_absolute_url}}"' style="margin-right:5%" id="login-box2"class="btn btn-outline-info">
                             <h2><strong>{{ sezione.nome_sezione }}</strong></h2>
                             <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
-                    
+                            <a class="btn btn-light float-left" href=" {%  url 'articolo-modifica' sezione.id %}">
+                                <i class='far fa-edit'></i>
+                            </a>
+                            <a class="btn btn-light float-right" href=" {%  url 'articolo-delete' sezione.id %}">
+                                <i class='far fa-trash-alt'></i>
+                            </a>
                         </div>
                         {% endfor %}
                     </div>
