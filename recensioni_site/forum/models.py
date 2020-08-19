@@ -10,7 +10,7 @@ class Sezione(models.Model):
     provincia = models.CharField(max_length=80,default='', null=False)
     indirizzo = models.CharField(max_length=80,default='', null=False)
 
-    logo_sezione = models.ImageField(blank=True, null=True)
+    logo_sezione = models.ImageField(null=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
