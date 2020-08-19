@@ -4,24 +4,38 @@
 
 {% block content %}
 
-    <h4>{% if request.user == user %}Il tuo {% endif %}Profilo Utente</h4>
-    <h1>User: {{ user }}</h1>
-    <br>
-    {% for sezione in sezioni %}
-    <div id="login">
-                <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
-                <h2><a style="color: #17a2b8;"
-                        href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a></h2>
+<div id="login">
+    
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <h4>{% if request.user == user %}I tuoi {% endif %} Annunci</h4>
+                    <br>
+                    <div class="inline-block">
+                        {% for sezione in sezioni %}
+                        <div onclick='location.href="{{ sezione.get_absolute_url}}"' style="margin-right:5%" id="login-box2"class="btn btn-outline-info">
+                            <h2><strong>{{ sezione.nome_sezione }}</strong></h2>
+                            <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
+                    
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    {% endfor %}
+</div>
+
+
+    
 <style>
-     #login {
-      margin-top: 120px;
-      max-width: 20%;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #9C9C9C;
-      background-color: #EAEAEA;
+    #login-box{
+        width: 100%;
+    }
+    .inline-block{
+        display: inline-flex;
+    width: 100%;
     }
 </style>
 {% endblock content %}
