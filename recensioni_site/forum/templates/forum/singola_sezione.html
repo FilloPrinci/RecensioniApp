@@ -50,6 +50,19 @@
     </div>
     </div>
     <br>
+
+{% for post in posts_discussione %}
+    <div class="card my-3">
+                    <div class="card-header">
+                        <h3>{{ post.autore_post }}</h3>
+                        <h3>{{ post.data_creazione }}</h3>
+                        <h3>{{ post.contenuto }}</h3>
+                        <h6 class="card-text">{{ sezione.descrizione }}</h6>
+                    </div>
+                </div>
+{% endfor %}
+{% include 'forum/form_risposta.html' %}
+
 <div class=center1>
     <div id="map-canvas" style="width:100%;height:400px;"></div>
 </div>

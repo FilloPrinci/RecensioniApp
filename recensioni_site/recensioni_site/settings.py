@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+
     'crispy_forms',
 
     'accounts',
     'core',
     'forum',
+
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -136,3 +139,4 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media-server')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
+

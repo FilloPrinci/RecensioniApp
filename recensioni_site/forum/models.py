@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import  User
+
 # Create your models here.
 
 class Sezione(models.Model):
@@ -32,5 +33,19 @@ class SezioneImage(models.Model):
 
     def __str__(self):
         return self.post.nome_sezione
+
+class Post(models.Model):
+    autore_post = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    contenuto = models.TextField()
+    rating = models.TextField()
+    data_creazione = models.DateTimeField(auto_now_add=True)
+    sezione = models.ForeignKey(Sezione, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.autore_post.username
+
+    class Meta:
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
 
     
