@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import  User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -10,6 +11,7 @@ class Sezione(models.Model):
     citta = models.CharField(max_length=80,default='', null=False)
     provincia = models.CharField(max_length=80,default='', null=False)
     indirizzo = models.CharField(max_length=80,default='', null=False)
+
 
     logo_sezione = models.ImageField(null=True)
 
@@ -37,7 +39,7 @@ class SezioneImage(models.Model):
 class Post(models.Model):
     autore_post = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     contenuto = models.TextField()
-    rating = models.TextField()
+    rating = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
     data_creazione = models.DateTimeField(auto_now_add=True)
     sezione = models.ForeignKey(Sezione, on_delete=models.CASCADE)
 

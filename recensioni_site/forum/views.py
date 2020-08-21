@@ -23,9 +23,21 @@ class CreaSezione(CreateView):
 def visualizzaSezione(request, pk):
     sezione = get_object_or_404(Sezione, pk=pk)
     posts_discussione = Post.objects.filter(sezione=sezione)
+    tot_rating = 0
+    n_rating = 0
+
+    if(len(posts_discussione) == 0):
+        media_rating = 0
+    else:
+        for post in posts_discussione:
+            tot_rating += post.rating
+            n_rating += 1
+
+        media_rating = tot_rating / n_rating
+
     form_risposta = PostModelForm()
     immagini = SezioneImage.objects.filter(post=sezione)
-    context = {"sezione": sezione, "immagini":immagini, "posts_discussione":posts_discussione, "form_risposta":form_risposta}
+    context = {"sezione": sezione, "immagini":immagini, "posts_discussione":posts_discussione, "form_risposta":form_risposta, "media_rating":media_rating}
     return render(request, "forum/singola_sezione.html", context )
 
 def aggiungiRisposta(request, pk):

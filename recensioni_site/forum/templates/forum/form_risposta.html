@@ -1,8 +1,18 @@
 {% load crispy_forms_tags %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <form class="mb-3" action="{% url 'rispondi_a_discussione' pk=sezione.pk %}" method="POST">
     {% csrf_token %}
     {{ form_risposta|crispy }}
     <input type="submit" class="btn btn-info" value="rispondi">
 </form>
+
+<script>
+
+    $(document).ready(function() {
+    $("#id_rating").attr({
+       "max" : 5,        // substitute your own
+       "min" : 1          // values (or variables) here
+    });
+});
+</script>
