@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="{% static 'css/recensioni.css' %}">
 
 
-    <title>{% block head_title %} Recensioni fiereh {% endblock head_title %}</title>
+    <title>{% block head_title %} Località reviews {% endblock head_title %}</title>
   </head>
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info" style="background:#054049!important;">
-      <a class="navbar-brand" href="/">Recensioni Fiereh</a>
+      <a class="navbar-brand" href="/">Località reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,9 +33,11 @@
         </form>
 
         <ul class="navbar-nav ml-auto">
+          {% if request.user.is_staff %}
           <li class="nav-item mr-5">
             <a class="btn btn-outline-info" href="{% url 'crea_sezione' %}">Aggiungi Luogo/Locale <span class="sr-only">(current)</span></a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'user_list' %}">Lista Utenti <span class="sr-only">(current)</span></a>
           </li>

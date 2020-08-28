@@ -17,7 +17,8 @@ class CreaSezione(CreateView):
     def form_valid(self, form):
         print(self.request.user)
         form.instance.user_id = self.request.user.pk
-
+        if not self.request.user.is_staff:
+            raise Http404
         return super().form_valid(form)
 
 def visualizzaSezione(request, pk):

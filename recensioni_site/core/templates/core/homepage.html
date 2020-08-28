@@ -2,21 +2,16 @@
 
 {% block content %}
 <div class="container">
-<h1 class="text-white">HomePage</h1>
+<h1 class="text-white">Tutte le località</h1>
 
 {% for sezione in lista_sezioni %}
 <div class="courses-container">
     <div class="course">
         <div class="course-preview">
-            <img src="{{ sezione.logo_sezione.url }}" style="width: 100%; height: 16rem;" alt="logo della sezione">
+            <img src="{{ sezione.logo_sezione.url }}" style="margin-left: auto; margin-right: auto; width: 100%; " alt="logo della sezione">
         </div>
         <div class="course-info">
-            <div class="progress-container">
-                <div class="progress"></div>
-                <span class="progress-text">
-                    6/9 Challenges
-                </span>
-            </div>
+
             <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
             <h2><a style="color: #17a2b8;"
                     href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a></h2>
@@ -62,8 +57,8 @@
 .course-preview {
 	background-color: #054049!important;
 	color: #fff;
-	padding: 30px;
-	max-width: 250px;
+	padding: 10px;
+	max-width: 300px;
 }
 
 .course-preview a {
