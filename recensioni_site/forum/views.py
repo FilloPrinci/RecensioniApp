@@ -35,7 +35,7 @@ def visualizzaSezione(request, pk):
             n_rating += 1
 
         media_rating = tot_rating / n_rating
-
+    media_rating = int(round(media_rating))
     form_risposta = PostModelForm()
     immagini = SezioneImage.objects.filter(post=sezione)
     context = {"sezione": sezione, "immagini":immagini, "posts_discussione":posts_discussione, "form_risposta":form_risposta, "media_rating":media_rating}

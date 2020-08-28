@@ -1,94 +1,122 @@
 {% load crispy_forms_tags %}
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-11">
+                <div id="login-box" class="col-md-12">
+                    <h3>Rispondi</h3>
+                    <br>
+                    <form id="user-rating-form1">
+                        <span class="user-rating float-right">
+                            <input type="radio" name="rating1" value="5"><span class="star"></span>
 
-<form class="mb-3" action="{% url 'rispondi_a_discussione' pk=sezione.pk %}" method="POST">
-    {% csrf_token %}
-    {{ form_risposta|crispy }}
-    <input type="submit" class="btn btn-info" value="rispondi">
-</form>
+                            <input type="radio" name="rating1" value="4"><span class="star"></span>
 
-<form id="user-rating-form">
-    <span class="user-rating">
-    <input type="radio" name="rating1" value="5"><span class="star"></span>
+                            <input type="radio" name="rating1" value="3"><span class="star"></span>
 
-    <input type="radio" name="rating1" value="4"><span class="star"></span>
+                            <input type="radio" name="rating1" value="2"><span class="star"></span>
 
-    <input type="radio" name="rating1" value="3"><span class="star"></span>
-
-    <input type="radio" name="rating1" value="2"><span class="star"></span>
-
-    <input type="radio" name="rating1" value="1"><span class="star"></span>
-</span>
-</form>
-        <p style="margin-left: 20px">You have selected <span id="selected-rating" class="selected-rating" >0</span> stars.</p>
+                            <input type="radio" name="rating1" checked value="1"><span class="star"></span>
+                        </span>
+                    </form>
+                    <form class="mb-3" action="{% url 'rispondi_a_discussione' pk=sezione.pk %}" method="POST">
+                        {% csrf_token %}
+                        {{ form_risposta|crispy }}
+                        <input type="submit" class="btn btn-info" value="rispondi">
+                    </form>
+                    <p style="margin-left: 20px; display:none">You have selected <span id="selected-rating"
+                            class="selected-rating">0</span> stars.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('#user-rating-form').on('change','[name="rating1"]',function(){
-	$('#selected-rating').text($('[name="rating1"]:checked').val());
-	$('#id_rating').val($('[name="rating1"]:checked').val());
-});
+        $('#user-rating-form1').on('change', '[name="rating1"]', function () {
+            $('#selected-rating').text($('[name="rating1"]:checked').val());
+            $('#id_rating').val($('[name="rating1"]:checked').val());
+        });
 
 
-    $("#id_rating").attr({
-       "max" : 5,        // substitute your own
-       "min" : 1          // values (or variables) here
+        $("#id_rating").attr({
+            "max": 5,        // substitute your own
+            "min": 1          // values (or variables) here
+        });
+
     });
-
-});
 </script>
 
 <style>
+    #login .container #login-row #login-column #login-box {
+        margin-top: 5% !important
+    }
 
-    #id_rating{display: none}
+
+    #id_rating {
+        display: none
+    }
+
 
     .user-rating {
-    direction: rtl;
-    font-size: 20px;
-    unicode-bidi: bidi-override;
-    padding: 10px 30px;
-    display: inline-block;
-}
-.user-rating input {
-    opacity: 0;
-    position: relative;
-    left: -15px;
-    z-index: 2;
-    cursor: pointer;
-}
-.user-rating span.star:before {
-    color: #777777;
-    content:"ï€†";
-    /*padding-right: 5px;*/
-}
-.user-rating span.star {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    position: relative;
-    z-index: 1;
-}
-.user-rating span {
-    margin-left: -15px;
-}
-.user-rating span.star:before {
-    color: #777777;
-    content:"\f006";
-    /*padding-right: 5px;*/
-}
-.user-rating input:hover + span.star:before, .user-rating input:hover + span.star ~ span.star:before, .user-rating input:checked + span.star:before, .user-rating input:checked + span.star ~ span.star:before {
-    color: #ffd100;
-    content:"\f005";
-}
+        direction: rtl;
+        font-size: 20px;
+        unicode-bidi: bidi-override;
+        padding: 10px 30px;
+        display: inline-block;
+    }
 
-.selected-rating{
-    color: #ffd100;
-    font-weight: bold;
-    font-size: 3em;
-}
+    .user-rating input {
+        opacity: 0;
+        position: relative;
+        left: -15px;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .user-rating span.star:before {
+        color: #777777;
+        content: "ï€†";
+        /*padding-right: 5px;*/
+    }
+
+    .user-rating span.star {
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        position: relative;
+        z-index: 1;
+    }
+
+    .user-rating span {
+        margin-left: -15px;
+    }
+
+    .user-rating span.star:before {
+        color: #777777;
+        content: "\f006";
+        /*padding-right: 5px;*/
+    }
+
+    .user-rating input:hover+span.star:before,
+    .user-rating input:hover+span.star~span.star:before,
+    .user-rating input:checked+span.star:before,
+    .user-rating input:checked+span.star~span.star:before {
+        color: #ffd100;
+        content: "\f005";
+    }
+
+    .selected-rating {
+        color: #ffd100;
+        font-weight: bold;
+        font-size: 3em;
+    }
 </style>

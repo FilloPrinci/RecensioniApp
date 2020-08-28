@@ -6,14 +6,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Sezione(models.Model):
-    nome_sezione = models.CharField(max_length=80)
+    nome_sezione = models.CharField(max_length=80 ,verbose_name='Nome Località')
     descrizione = models.TextField(default='', null=False)
     citta = models.CharField(max_length=80,default='', null=False)
     provincia = models.CharField(max_length=80,default='', null=False)
     indirizzo = models.CharField(max_length=80,default='', null=False)
 
-
-    logo_sezione = models.ImageField(null=True)
+    logo_sezione = models.ImageField(null=True, verbose_name='Immagine')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
