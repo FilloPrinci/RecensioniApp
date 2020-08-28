@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from forum.models import Sezione
 from django.views.generic.list import ListView
 from django.views.generic import DeleteView, UpdateView, DetailView, FormView
@@ -11,6 +11,23 @@ class HomeView(ListView):
     queryset = Sezione.objects.all()
     template_name = 'core/homepage.html'
     context_object_name = "lista_sezioni"
+
+def cerca(request, ):
+    '''
+    Barra di ricerca
+    :return: ritorna la pagina che mostra i risultati della ricerca
+    '''
+    if "q" in request.GET:
+        querystring = request.GET.get("q")
+        # print(querystring)
+        if len(querystring) == 0:
+            return redirect("/cerca/")
+        sezioni = Sezione.objects.filter(nome_sezione__icontains=querystring)
+        # print(users)
+        context = {"sezioni": sezioni}
+        return render(request, 'core/cerca.html', context)
+    else:
+        return render(request, 'core/cerca.html')
 
 class UserList(ListView):
     model = User
