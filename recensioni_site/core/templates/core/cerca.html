@@ -36,6 +36,33 @@
 <p>---</p>
 {% endif %}
 
+
+{% if tipi %}
+{% for sezione in tipi %}
+    <div id="login">
+
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+
+                        <div class="courses-container">
+                        <div class="course-info">
+                        <p><a href="{{ sezione.get_absolute_url }}">{{ sezione.nome_sezione }}</a></p>
+                            <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% else %}
+<p>---</p>
+{% endif %}
+
 <style>
     #login .container #login-row #login-column #login-box {
       margin-top: 5% !important;

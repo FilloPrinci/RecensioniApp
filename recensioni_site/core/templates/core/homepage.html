@@ -4,24 +4,47 @@
 <div class="container">
 <h1 class="text-white">Tutte le località</h1>
 
-{% for sezione in lista_sezioni %}
-<div class="courses-container">
-    <div class="course">
-        <div class="course-preview">
-            <img src="{{ sezione.logo_sezione.url }}" style="margin-left: auto; margin-right: auto; width: 100%; " alt="logo della sezione">
-        </div>
-        <div class="course-info">
+    {% for sezione in lista_sezioni %}
+    <div class="courses-container">
+        <div class="course">
+            <div class="course-preview">
+                <img src="{{ sezione.logo_sezione.url }}" style="margin-left: auto; margin-right: auto; width: 100%; " alt="logo della sezione">
+            </div>
+            <div class="course-info">
 
-            <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
-            <h2><a style="color: #17a2b8;"
-                    href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a></h2>
-            <h3>{{ sezione.descrizione }}</h3>
-            <button onclick="location.href='{{ sezione.get_absolute_url}}'" class="btn1">Apri</button>
+                <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
+                <h2><a style="color: #17a2b8;"
+                        href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a></h2>
+                <h3>{{ sezione.descrizione }}</h3>
+
+                {% if sezione.hotelB %}
+                    <h5 style="color: #17a2b8;">hotel</h5>
+                {% endif %}
+
+                {% if sezione.ristoranteB %}
+                    <h5 style="color: #17a2b8;">ristorante</h5>
+                {% endif %}
+
+                {% if sezione.fastFoodB %}
+                    <h5 style="color: #17a2b8;">fastFood</h5>
+                {% endif %}
+
+                {% if sezione.casaVacanzaB %}
+                    <h5 style="color: #17a2b8;">casaVacanza</h5>
+                {% endif %}
+
+                {% if sezione.agriturismoB %}
+                    <h5 style="color: #17a2b8;">agriturismo</h5>
+                {% endif %}
+
+                <h5>{{ sezione.tipo }}</h5>
+
+                <button onclick="location.href='{{ sezione.get_absolute_url}}'" class="btn1">Apri</button>
+            </div>
         </div>
     </div>
-</div>
+    {% endfor %}
 
-{% endfor %}
 </div>
 
 <style>
