@@ -24,6 +24,17 @@ class CreaSezione(CreateView):
 def visualizzaSezione(request, pk):
     sezione = get_object_or_404(Sezione, pk=pk)
     posts_discussione = Post.objects.filter(sezione=sezione)
+
+    for post in posts_discussione:
+            setattr(post,'total_likes',post.total_likes())
+            checkifPostLikeExists = Post.objects.filter(
+                id=post.id, likes=request.user).exists()
+            if(checkifPostLikeExists):
+                setattr(post,'viewButton','btn-outline-danger')
+            else:
+                setattr(post,'viewButton','btn-danger')
+            
+
     tot_rating = 0
     n_rating = 0
     media_rating_reale = 0
@@ -58,4 +69,20 @@ def aggiungiRisposta(request, pk):
             return HttpResponseRedirect(url_discussione)
     else:
         return HttpResponseBadRequest()
+
+
+def likeView(request, pk):
+    checkifPostLikeExists = Post.objects.filter(
+        id=request.POST.get('post_id'), likes=request.user).exists()
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    print(post)
+    if (checkifPostLikeExists):
+        post.likes.remove(request.user)
+        
+    else:
+        post.likes.add(request.user)
+
+    url_discussione = reverse("sezione_view", kwargs={"pk": post.sezione.pk})
+    return HttpResponseRedirect(url_discussione)
+
 

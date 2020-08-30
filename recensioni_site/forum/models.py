@@ -41,6 +41,10 @@ class Post(models.Model):
     rating = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
     data_creazione = models.DateTimeField(auto_now_add=True)
     sezione = models.ForeignKey(Sezione, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='blog_posts')
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.autore_post.username

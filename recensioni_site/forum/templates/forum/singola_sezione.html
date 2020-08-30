@@ -71,7 +71,13 @@
                 </p>
                 <div class="clearfix"></div>
                 <p>{{ post.contenuto }}</p>
-                
+                <p>
+                    <form action="{% url 'like_post' post.pk %}" method="POST">
+                        {% csrf_token %}
+                        {{post}}
+                        <button type="submit" name="post_id" value="{{post.id}}"  class="float-right btn {{post.viewButton}}"> <i class="fa fa-heart"></i> {{post.total_likes}} Like</button>
+                    </form>
+            </p>
             </div>
         </div>
     </div>
