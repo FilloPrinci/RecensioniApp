@@ -23,8 +23,8 @@ def cerca(request, ):
         if len(querystring) == 0:
             return redirect("/cerca/")
         sezioni = Sezione.objects.filter(nome_sezione__icontains=querystring)
-        # print(users)
-        context = {"sezioni": sezioni}
+        print(sezioni)
+        context = {"sezioni": sezioni, "tipi":tipi}
         return render(request, 'core/cerca.html', context)
     else:
         return render(request, 'core/cerca.html')

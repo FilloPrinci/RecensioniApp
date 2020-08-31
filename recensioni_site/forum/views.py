@@ -10,13 +10,18 @@ from .mixins import StaffMixing
 # Create your views here.
 class CreaSezione(CreateView):
     model = Sezione
-    fields = ["nome_sezione", "descrizione", "citta", "provincia", "indirizzo", "logo_sezione"]
+    fields = ["nome_sezione", "descrizione", "citta", "provincia", "indirizzo", "logo_sezione", "hotelB", "ristoranteB", "fastFoodB", "casaVacanzaB", "agriturismoB"]
     template_name = "forum/crea_sezione.html"
     success_url = "/"
 
+
+
     def form_valid(self, form):
+
         print(self.request.user)
         form.instance.user_id = self.request.user.pk
+
+        form.save()
         if not self.request.user.is_staff:
             raise Http404
         return super().form_valid(form)
@@ -49,6 +54,7 @@ def visualizzaSezione(request, pk):
 
     media_rating_reale = media_rating
     media_rating = int(round(media_rating))
+
     form_risposta = PostModelForm()
     immagini = SezioneImage.objects.filter(post=sezione)
     context = {"sezione": sezione, "immagini":immagini, "posts_discussione":posts_discussione, "form_risposta":form_risposta, "media_rating":media_rating, "media_rating_reale":media_rating_reale}

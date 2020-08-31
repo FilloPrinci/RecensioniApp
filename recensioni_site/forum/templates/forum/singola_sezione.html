@@ -12,33 +12,51 @@
 <div class=center1>
     <div id="titlebar" class="listing-titlebar">
         <div class="listing-titlebar-title">
-<form id="user-rating-form">
-    <span class="user-rating1 float-right">
+            <form id="user-rating-form">
+                <span class="user-rating1 float-right">
 
-        <input type="radio" name="rating2" disabled class="deafultcheck5" value="5"><span class="star"></span>
+                    <input type="radio" name="rating2" disabled class="deafultcheck5" value="5"><span class="star"></span>
 
-        <input type="radio" name="rating2" disabled class="deafultcheck4" value="4"><span class="star"></span>
+                    <input type="radio" name="rating2" disabled class="deafultcheck4" value="4"><span class="star"></span>
 
-        <input type="radio" name="rating2"  disabled class="deafultcheck3" value="3"><span class="star"></span>
+                    <input type="radio" name="rating2"  disabled class="deafultcheck3" value="3"><span class="star"></span>
 
-        <input type="radio" name="rating2"  disabled class="deafultcheck2" value="2"><span class="star"></span>
+                    <input type="radio" name="rating2"  disabled class="deafultcheck2" value="2"><span class="star"></span>
 
-        <input type="radio" name="rating2"  disabled  class="deafultcheck1" value="1"><span class="star"></span>
-    </span>
-</form>
+                    <input type="radio" name="rating2"  disabled  class="deafultcheck1" value="1"><span class="star"></span>
+                </span>
+            </form>
             <h2>{{sezione.nome_sezione}} <span class="listing-tag">Eat &amp; Drink</span></h2>
             <br>
-           
-
         </div>
         <h4>{{sezione.descrizione}}</h4>
         <br>
+                {% if sezione.hotelB %}
+                    <h5 style="color: #17a2b8;">hotel</h5>
+                {% endif %}
+
+                {% if sezione.ristoranteB %}
+                    <h5 style="color: #17a2b8;">ristorante</h5>
+                {% endif %}
+
+                {% if sezione.fastFoodB %}
+                    <h5 style="color: #17a2b8;">fastFood</h5>
+                {% endif %}
+
+                {% if sezione.casaVacanzaB %}
+                    <h5 style="color: #17a2b8;">casaVacanza</h5>
+                {% endif %}
+
+                {% if sezione.agriturismoB %}
+                    <h5 style="color: #17a2b8;">agriturismo</h5>
+                {% endif %}
+
         <div class=center1>
             <div id="map-canvas" style="width:100%;height:400px;"></div>
         </div>
     </div>
-    </div>
-    <br>
+</div>
+<br>
 
 {% for post in posts_discussione %}
 

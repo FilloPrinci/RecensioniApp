@@ -14,6 +14,14 @@ class Sezione(models.Model):
 
     logo_sezione = models.ImageField(null=True, verbose_name='Immagine')
 
+    # tipi di locali
+    hotelB = models.BooleanField(verbose_name='hotel')
+    ristoranteB = models.BooleanField(verbose_name='ristorante')
+    fastFoodB = models.BooleanField(verbose_name='fastFood')
+    casaVacanzaB = models.BooleanField(verbose_name='casaVacanza')
+    agriturismoB = models.BooleanField(verbose_name='agriturismo')
+
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

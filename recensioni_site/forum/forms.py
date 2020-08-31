@@ -15,7 +15,6 @@ class DiscussioneModelForm(forms.ModelForm):
 
 class PostModelForm(forms.ModelForm):
 
-
     class Meta:
         model = Post
         fields = ["contenuto", "rating"]
