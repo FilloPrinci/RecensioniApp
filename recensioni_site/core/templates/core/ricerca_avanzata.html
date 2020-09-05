@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ block.super }} - Ricerca Avanzata{% endblock head_title %}
+
+{% block content %}
+
+<form class="form-inline my-2 my-lg-0" action="{% url 'risultati' %}">
+  <input name="tipo1" class="inputCerca form-control mr-sm-2" id="tipo1" type="checkbox" value="True">
+    <label for="tipo1"> HOTEL</label>
+  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo2" name="tipo2" value="True">
+    <label for="tipo2"> RISTORANTE</label>
+  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo3" name="tipo3" value="True">
+    <label for="tipo3"> FAST FOOD</label>
+  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo4" name="tipo4" value="True">
+    <label for="tipo4"> CASA VACANZA</label>
+  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo5" name="tipo5" value="True">
+    <label for="tipo5"> AGRITURISMO</label>
+
+    <input name="cosa" class="inputCerca form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Search">
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Cerca</button>
+</form>
+
+{% endblock content %}

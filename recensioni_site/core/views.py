@@ -24,10 +24,68 @@ def cerca(request, ):
             return redirect("/cerca/")
         sezioni = Sezione.objects.filter(nome_sezione__icontains=querystring)
         print(sezioni)
-        context = {"sezioni": sezioni, "tipi":tipi}
+        context = {"sezioni": sezioni}
         return render(request, 'core/cerca.html', context)
     else:
         return render(request, 'core/cerca.html')
+
+def ricerca_avanzata(request, ):
+    return render(request, 'core/ricerca_avanzata.html')
+
+def risultati(request, ):
+    '''
+    Barra di ricerca
+    :return: ritorna la pagina che mostra i risultati della ricerca
+    '''
+
+    if "cosa" in request.GET:
+        querystring = request.GET.get("cosa")
+        sezioni = Sezione.objects.filter(nome_sezione__icontains=querystring)
+    else:
+        querystring = ""
+    print(querystring)
+
+
+    if "tipo1"  in request.GET:
+        tipo1 = request.GET.get("tipo1")
+        sezioni = sezioni.exclude(hotelB=False)
+    else:
+        tipo1 = "False"
+    print(tipo1)
+
+    if "tipo2"  in request.GET:
+        tipo2 = request.GET.get("tipo2")
+        sezioni = sezioni.exclude(ristoranteB=False)
+    else:
+        tipo2 = "False"
+    print(tipo2)
+
+    if "tipo3"  in request.GET:
+        tipo3 = request.GET.get("tipo3")
+        sezioni = sezioni.exclude(fastFoodB=False)
+    else:
+        tipo3 = "False"
+    print(tipo3)
+
+    if "tipo4"  in request.GET:
+        tipo4 = request.GET.get("tipo4")
+        sezioni = sezioni.exclude(casaVacanzaB=False)
+    else:
+        tipo4 = "False"
+    print(tipo4)
+
+    if "tipo5"  in request.GET:
+        tipo5 = request.GET.get("tipo5")
+        sezioni = sezioni.exclude(agriturismoB=False)
+    else:
+        tipo5 = "False"
+    print(tipo5)
+
+    print("risultao : " + str(sezioni))
+
+    context = {"sezioni": sezioni}
+
+    return render(request, 'core/risultati.html', context)
 
 class UserList(ListView):
     model = User
@@ -91,4 +149,3 @@ class ArticleDelete(DeleteView):
         articolo = get_object_or_404(Sezione, id=articleid)
         user = get_object_or_404(User, username=articolo.user)
         return reverse_lazy('user_profile', kwargs={'username': user})
-

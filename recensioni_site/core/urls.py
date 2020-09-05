@@ -9,4 +9,6 @@ urlpatterns = [
     path('user/<username>/', views.userProfileView, name='user_profile'),
     path('articolo/<int:pk>/delete/', login_required(views.ArticleDelete.as_view()),  name='articolo-delete'),
     path('cerca/', login_required(views.cerca), name='cerca'),
+    path('ricerca_avanzata/', views.ricerca_avanzata , name='ricerca_avanzata'),
+    path('risultati/', views.risultati , name='risultati'),
 ]

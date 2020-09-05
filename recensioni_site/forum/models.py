@@ -21,7 +21,6 @@ class Sezione(models.Model):
     casaVacanzaB = models.BooleanField(verbose_name='casaVacanza')
     agriturismoB = models.BooleanField(verbose_name='agriturismo')
 
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

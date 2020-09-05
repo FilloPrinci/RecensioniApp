@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ block.super }} - Risulatati Ricercaq avanzata{% endblock head_title %}
+
+{% block content %}
+
+<h3 class="text-center text-white pt-5">Risultati della ricerca avanzata </h3>
+
+{% if sezioni %}
+{% for sezione in sezioni %}
+    <div id="login">
+
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+
+                        <div class="courses-container">
+                        <div class="course-info">
+                        <p><a href="{{ sezione.get_absolute_url }}">{{ sezione.nome_sezione }}</a></p>
+                            <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}} </h6>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% else %}
+<p>---</p>
+{% endif %}
+
+{% endblock content %}
