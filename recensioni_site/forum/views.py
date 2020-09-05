@@ -30,14 +30,21 @@ def visualizzaSezione(request, pk):
     sezione = get_object_or_404(Sezione, pk=pk)
     posts_discussione = Post.objects.filter(sezione=sezione)
 
-    for post in posts_discussione:
-            setattr(post,'total_likes',post.total_likes())
-            checkifPostLikeExists = Post.objects.filter(
-                id=post.id, likes=request.user).exists()
-            if(checkifPostLikeExists):
-                setattr(post,'viewButton','btn-outline-danger')
-            else:
-                setattr(post,'viewButton','btn-danger')
+    if request.user.is_authenticated:
+
+        for post in posts_discussione:
+                setattr(post,'total_likes',post.total_likes())
+                checkifPostLikeExists = Post.objects.filter(
+                    id=post.id, likes=request.user).exists()
+                if(checkifPostLikeExists):
+                    setattr(post,'viewButton','btn-outline-danger')
+                else:
+                    setattr(post,'viewButton','btn-danger')
+    else:
+        for post in posts_discussione:
+                setattr(post,'total_likes',post.total_likes())
+
+                setattr(post,'viewButton','btn-danger disabled')
             
 
     tot_rating = 0

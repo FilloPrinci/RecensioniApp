@@ -105,6 +105,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
+
     
 <script>
 
@@ -201,7 +202,11 @@
 </script>
 
         <style>
-    
+
+            .btn-danger.disabled, .btn-danger:disabled {
+                pointer-events: none;
+
+            }
             
             .card{
                 width:50%;
