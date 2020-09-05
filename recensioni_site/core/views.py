@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
-from forum.models import Sezione
+from forum.models import Sezione,Post
 from django.views.generic.list import ListView
 from django.views.generic import DeleteView, UpdateView, DetailView, FormView
 from forum.views import visualizzaSezione
@@ -11,6 +11,34 @@ class HomeView(ListView):
     queryset = Sezione.objects.all()
     template_name = 'core/homepage.html'
     context_object_name = "lista_sezioni"
+
+
+def homeView(request):
+    listaSezione = Sezione.objects.all()
+    for sezione in listaSezione:
+        posts_discussione = Post.objects.filter(sezione=sezione)
+
+        tot_rating = 0
+        n_rating = 0
+        media_rating_reale = 0
+
+        if(len(posts_discussione) == 0):
+            media_rating = 0
+        else:
+            for post in posts_discussione:
+                tot_rating += post.rating
+                n_rating += 1
+            media_rating = tot_rating / n_rating
+
+        media_rating_reale = round(media_rating, 1)
+        setattr(sezione,'mediaRating',media_rating_reale)
+    sezioniOrderRating  = sorted(
+        listaSezione, key=lambda x: x.mediaRating, reverse=True)
+
+     
+    
+    context = {"lista_sezioni": listaSezione,"sezioniOrderRating":sezioniOrderRating}
+    return render(request, 'core/homepage.html', context)
 
 def cerca(request, ):
     '''
