@@ -29,6 +29,18 @@ class CreaSezione(CreateView):
         return super().form_valid(form)
 
 def visualizzaSezione(request, pk):
+
+    if "cliccato" in request.GET:
+        is_cliccato = request.GET.get("cliccato")
+        print(is_cliccato)
+
+        if (is_cliccato == "True"):
+            request.user.first_name = "0"
+            request.user.last_name = ""
+            request.user.save()
+            print(request.user.first_name)
+
+
     sezione = get_object_or_404(Sezione, pk=pk)
     posts_discussione = Post.objects.filter(sezione=sezione)
 
