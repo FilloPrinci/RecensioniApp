@@ -4,7 +4,9 @@ from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from .models import Sezione,SezioneImage
 from .forms import DiscussioneModelForm, PostModelForm
+from django.contrib.auth.models import User
 from .models import Post, Sezione
+import json
 from .mixins import StaffMixing
 
 # Create your views here.
@@ -77,8 +79,29 @@ def aggiungiRisposta(request, pk):
             form.instance.autore_post = request.user
             form.save()
             url_discussione = reverse("sezione_view", kwargs={"pk": pk})
-            print("ciao")
-            print("url da stampare :  "  + url_discussione)
+
+            user = get_object_or_404(User, pk=sezione.user.pk)
+            if (user.first_name== ""):
+                numero = 0
+            else:
+                numero = int(user.first_name)
+            numero += 1
+            user.first_name = str(numero)
+
+            if(user.last_name == ""):
+                notifiche = [{"user_post":request.user.username, "sezione_commentata":sezione.nome_sezione, "sezione_url":url_discussione}]
+                user.last_name = json.dumps(notifiche)
+            else:
+                temp = json.loads(user.last_name)
+                temp.append({"user_post":request.user.username, "sezione_commentata":sezione.nome_sezione, "sezione_url":url_discussione})
+                user.last_name = json.dumps(temp)
+
+
+            user.save()
+
+            print("numero di notifiche tot: " + user.first_name)
+            print("lista urls: " + user.last_name)
+
             return HttpResponseRedirect(url_discussione)
     else:
         return HttpResponseBadRequest()

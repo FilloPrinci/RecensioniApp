@@ -49,7 +49,23 @@
           </li>
 
 
+
           {% if request.user.is_authenticated %}
+
+          {% if request.user.is_staff %}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifiche {{ request.user.first_name }}
+              </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">{{ request.user.last_name }}</a>
+                <a class="dropdown-item" href="{% url 'password_change' %}">Aggiorna Password</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Esci</a>
+            </div>
+          </li>
+          {% endif %}
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ request.user.username }}
