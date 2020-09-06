@@ -27,6 +27,7 @@
                 </span>
             </form>
             <h2>{{sezione.nome_sezione}} <span class="listing-tag">Eat &amp; Drink</span></h2>
+            <h6>{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}}
             <br>
         </div>
         <h4>{{sezione.descrizione}}</h4>
@@ -52,7 +53,7 @@
                 {% endif %}
 
         <div class=center1>
-            <div id="map-canvas" style="width:100%;height:400px;"></div>
+            <div id="map" style="width:100%;height:400px;"></div>
         </div>
     </div>
 </div>
@@ -105,77 +106,57 @@
     {% include 'forum/form_risposta.html' %}
 {% endif %}
 
-<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvMnzPf-OSKu0NxNz6jIPFP_l12GJNY0A&libraries=places&v=weekly"
+    defer></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
     
 <script>
-
-    let map;
+    $(document).ready(function () {
+        let map;
         let service;
         let infowindow;
+        let provincia= "{{ sezione.provincia }}"
+        let comune="{{ sezione.citta }}"
+        let via="{{ sezione.indirizzo }}"
 
-    function initialize() {
+        function initMap() {
+            const sydney = new google.maps.LatLng(0, 0);
+            infowindow = new google.maps.InfoWindow();
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: sydney,
+                zoom: 15
+            });
+            const request = {
+                query: provincia +" " + comune+ " " + via,
+                fields: ["name", "geometry"]
+            };
+            service = new google.maps.places.PlacesService(map);
+            service.findPlaceFromQuery(request, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    for (let i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
 
-            var myLatLng = new google.maps.LatLng(45.4375, 12.3358),
-                myOptions = {
-                    zoom: 5,
-                    center: myLatLng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                },
-                map = new google.maps.Map(document.getElementById('map-canvas'), myOptions),
-                marker = new google.maps.Marker({
-                    position: myLatLng,
-                    map: map
-                });
-
-                const request = {
-            query: "Museum of Contemporary Art Australia",
-            fields: ["name", "geometry"]
-        };
-        service = new google.maps.places.PlacesService(map);
-        service.findPlaceFromQuery(request, (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                for (let i = 0; i < results.length; i++) {
-                    createMarker(results[i]);
+                    map.setCenter(results[0].geometry.location);
                 }
-
-                map.setCenter(results[0].geometry.location);
-            }
-        });
-
-           
-
+            });
         }
 
         function createMarker(place) {
-                const marker = new google.maps.Marker({
-                    map,
-                    position: place.geometry.location
-                });
-                google.maps.event.addListener(marker, "click", () => {
-                    infowindow.setContent(place.name);
-                    infowindow.open(map);
-                });
-            }
+            const marker = new google.maps.Marker({
+                map,
+                position: place.geometry.location
+            });
+            google.maps.event.addListener(marker, "click", () => {
+                infowindow.setContent(place.name);
+                infowindow.open(map);
+            });
+        }
 
-
-        
-
-            function initMap() {
-                const sydney = new google.maps.LatLng(-33.867, 151.195);
-                infowindow = new google.maps.InfoWindow();
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: sydney,
-                    zoom: 15
-                });
-                
-            }
-
-            
-
-        initialize();   
+              initMap()
     var rating = "{{ media_rating }}"
     
 
@@ -184,6 +165,7 @@
                 $('.deafultcheck' + rating ).prop("checked", true);
             
 
+             });
             });
 </script>
 
