@@ -57,11 +57,8 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Notifiche {{ request.user.first_name }}
               </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">{{ request.user.last_name }}</a>
-                <a class="dropdown-item" href="{% url 'password_change' %}">Aggiorna Password</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'logout' %}">Esci</a>
+            <div class="dropdown-menu notificheListMenu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item noticheList" style="display:none" href="{% url 'user_profile' username=request.user.username %}">{{ request.user.last_name }}</a>
             </div>
           </li>
           {% endif %}
@@ -122,6 +119,16 @@
                 $('.cerca').attr('disabled', false);
             }
         });
+
+        $(document).ready(function () {
+           var notifiche = $('.noticheList').text();
+           var objNotifiche = JSON.parse(notifiche);
+           objNotifiche.forEach(element => {
+             
+              $('.notificheListMenu').append("<a class='dropdown-item noticheList' href='"+ element.sezione_url+ "'><strong>"+ element.user_post +"</strong> ha aggiunto una <br> recensione a <strong>" + element.sezione_commentata + "</strong></a><div class='dropdown - divider'></div>")
+           });
+           
+          });
 </script>
 
   <style>
