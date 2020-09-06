@@ -9,29 +9,34 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form class="form-inline my-2 my-lg-0" action="{% url 'risultati' %}">
-                      <div class="form-check">
-                        <input name="tipo1" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo1" type="checkbox" value="True">
-                          <label for="tipo1" class="form-check-label" > HOTEL</label>
+                    <form class=" my-2 my-lg-0" action="{% url 'risultati' %}">
+                      <input name="cosa" class="inputCerca form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Search">
+                      <br>
+                      <div class="custom-control custom-checkbox">
+                        <input name="tipo1" class="inputCerca  mr-sm-2 custom-control-input" id="tipo1" type="checkbox" value="True">
+                          <label for="tipo1" class="custom-control-label" > HOTEL</label>
                       </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo2" name="tipo2" value="True">
-                        <label for="tipo2" class="form-check-label"> RISTORANTE</label>
+                      <br>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="inputCerca  mr-sm-2 custom-control-input" id="tipo2" name="tipo2" value="True">
+                        <label for="tipo2" class="custom-control-label"> RISTORANTE</label>
                       </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo3" name="tipo3" value="True">
-                          <label for="tipo3" class="form-check-label"> FAST FOOD</label>
+                      <br>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="inputCerca  mr-sm-2 custom-control-input" id="tipo3" name="tipo3" value="True">
+                          <label for="tipo3" class="custom-control-label"> FAST FOOD</label>
                       </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo4" name="tipo4" value="True">
-                          <label for="tipo4" class="form-check-label"> CASA VACANZA</label>
+                      <br>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="inputCerca custom-control-input mr-sm-2 " id="tipo4" name="tipo4" value="True">
+                          <label for="tipo4" class="custom-control-label"> CASA VACANZA</label>
                       </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo5" name="tipo5" value="True">
-                          <label for="tipo5" class="form-check-label"> AGRITURISMO</label>
+                      <br>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="inputCerca  mr-sm-2 custom-control-input" id="tipo5" name="tipo5" value="True">
+                          <label for="tipo5" class="custom-control-label"> AGRITURISMO</label>
                       </div>
-
-                        <input name="cosa" class="inputCerca form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Search">
+                      <br>
                         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Cerca</button>
                     </form>
                 </div>
@@ -40,42 +45,6 @@
     </div>
     </div>
 
-<div class="form-check">
-  <input name="tipo1" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo1" type="checkbox" value="True">
-    <label for="tipo1" class="form-check-label" > HOTEL</label>
-</div>
-<div class="form-check">
-  <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo2" name="tipo2" value="True">
-  <label for="tipo2" class="form-check-label"> RISTORANTE</label>
-</div>
-<div class="form-check">
-  <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo3" name="tipo3" value="True">
-    <label for="tipo3" class="form-check-label"> FAST FOOD</label>
-</div>
-<div class="form-check">
-  <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo4" name="tipo4" value="True">
-    <label for="tipo4" class="form-check-label"> CASA VACANZA</label>
-</div>
-<div class="form-check">
-  <input type="checkbox" class="inputCerca form-control mr-sm-2 form-check-input" id="tipo5" name="tipo5" value="True">
-    <label for="tipo5" class="form-check-label"> AGRITURISMO</label>
-</div>
-
-<form class="form-inline my-2 my-lg-0" action="{% url 'risultati' %}">
-  <input name="tipo1" class="inputCerca form-control mr-sm-2" id="tipo1" type="checkbox" value="True">
-    <label for="tipo1"> HOTEL</label><br>
-  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo2" name="tipo2" value="True">
-    <label for="tipo2"> RISTORANTE</label><br>
-  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo3" name="tipo3" value="True">
-    <label for="tipo3"> FAST FOOD</label><br>
-  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo4" name="tipo4" value="True">
-    <label for="tipo4"> CASA VACANZA</label><br>
-  <input type="checkbox" class="inputCerca form-control mr-sm-2" id="tipo5" name="tipo5" value="True">
-    <label for="tipo5"> AGRITURISMO</label><br>
-
-    <input name="cosa" class="inputCerca form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Search">
-    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Cerca</button>
-</form>
 
 
 
