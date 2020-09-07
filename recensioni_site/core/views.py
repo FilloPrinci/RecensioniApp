@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic import DeleteView, UpdateView, DetailView, FormView
 from forum.views import visualizzaSezione
 from django.urls import reverse_lazy
+from itertools import chain
 # Create your views here.
 
 class HomeView(ListView):
@@ -23,23 +24,45 @@ def homeView(request):
 
     arrayObj = [{"tag" : "hotel", "value" : usrDR.hotel}, {"tag" : "ristorante", "value" : usrDR.ristorante} ,{"tag" : "fastFood", "value" : usrDR.fastFood}, {"tag" : "casaVacanza", "value" : usrDR.casaVacanza}, {"tag" : "agriturismo", "value" : usrDR.agriturismo}]
 
+    arrayObj.sort(key=lambda x: x["value"], reverse=True)
+    arrayObjOrdinato = sorted(arrayObj, key=lambda x: x["value"], reverse=True)
 
-    print (max(node["value"] for node in arrayObj))
-    '''
-    valoreMax0 = ""
-    valoreMax1 = ""
-    valoreMax2 = ""
-    valoreMax3 = ""
-    valoreMax4 = ""
+    print("array ordinato: " + str(arrayObjOrdinato))
 
-    if (usrDR.hotel >= usrDR.ristorante and usrDR.hotel >= usrDR.fastFood and usrDR.hotel >= usrDR.casaVacanza and usrDR.hotel >= usrDR.agriturismo):
-        valoreMax0 = "hotel"
-        
-    else if (usrDR.ristorante >= usrDR.hotel and DR.ristorante >= usrDR.fastFood and usrDR.ristorante >= usrDR.casaVacanza and usrDR.ristorante >= usrDR.agriturismo):
-        valoreMax0 = "ristorante"
-    '''
+    listaSezioneTagFinale = []
 
-    print(arrayObj)
+    for element in arrayObj:
+        print(element)
+        if (element["tag"] == "hotel"):
+            print("cerco hotels")
+            listaSezioneTag = Sezione.objects.filter(hotelB="True")
+
+        if (element["tag"] == "ristorante"):
+            print("cerco ristorante")
+            listaSezioneTag = Sezione.objects.filter(ristoranteB="True")
+
+        if (element["tag"] == "fastFood"):
+            print("cerco fastFood")
+            listaSezioneTag = Sezione.objects.filter(fastFoodB="True")
+
+        if (element["tag"] == "casaVacanza"):
+            print("cerco casaVacanza")
+            listaSezioneTag = Sezione.objects.filter(casaVacanzaB="True")
+
+        if (element["tag"] == "agriturismo"):
+            print("cerco agriturismo")
+            listaSezioneTag = Sezione.objects.filter(agriturismoB="True")
+
+        listaSezioneTagFinale = list(chain(listaSezioneTagFinale, listaSezioneTag))
+        print(listaSezioneTagFinale)
+
+    listaSezioneTagFinaleSeria = []
+
+    for x in listaSezioneTagFinale:
+        if x not in listaSezioneTagFinaleSeria:
+            listaSezioneTagFinaleSeria.append(x)
+
+    print("lista finale : " + str(listaSezioneTagFinaleSeria))
 
     for sezione in listaSezione:
         posts_discussione = Post.objects.filter(sezione=sezione)
@@ -58,12 +81,10 @@ def homeView(request):
 
         media_rating_reale = round(media_rating, 1)
         setattr(sezione,'mediaRating',media_rating_reale)
-    sezioniOrderRating  = sorted(
-        listaSezione, key=lambda x: x.mediaRating, reverse=True)
-
+    sezioniOrderRating  = sorted(listaSezione, key=lambda x: x.mediaRating, reverse=True)
      
     
-    context = {"lista_sezioni": listaSezione,"sezioniOrderRating":sezioniOrderRating}
+    context = {"lista_sezioni": listaSezione,"sezioniOrderRating":sezioniOrderRating, "listaSezioneTagFinaleSeria":listaSezioneTagFinaleSeria}
     return render(request, 'core/homepage.html', context)
 
 def cerca(request, ):
