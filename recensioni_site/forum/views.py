@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
-from .models import Sezione,SezioneImage
+from .models import Sezione,SezioneImage, UserDataReccomandation
 from .forms import DiscussioneModelForm, PostModelForm
 from django.contrib.auth.models import User
 from .models import Post, Sezione
@@ -83,6 +83,13 @@ def visualizzaSezione(request, pk):
 
 def aggiungiRisposta(request, pk):
     sezione = get_object_or_404(Sezione, pk=pk)
+
+    listUsrDR = UserDataReccomandation.objects.filter(user=request.user)
+    if not (listUsrDR.count() > 0):
+        usrDR = UserDataReccomandation.objects.create(hotel=0, ristorante=0, fastFood=0, casaVacanza=0, agriturismo =0, user=request.user)
+    else:
+        usrDR = get_object_or_404(UserDataReccomandation, user=request.user)
+
     if (request.method == "POST"):
         form = PostModelForm(request.POST)
         if (form.is_valid()):
@@ -108,7 +115,18 @@ def aggiungiRisposta(request, pk):
                 temp.append({"user_post":request.user.username, "sezione_commentata":sezione.nome_sezione, "sezione_url":url_discussione})
                 user.last_name = json.dumps(temp)
 
+            if (sezione.hotelB):
+                usrDR.hotel += form.instance.rating
+            if (sezione.ristoranteB):
+                usrDR.ristorante += form.instance.rating
+            if (sezione.fastFoodB):
+                usrDR.fastFood += form.instance.rating
+            if (sezione.casaVacanzaB):
+                usrDR.casaVacanza += form.instance.rating
+            if (sezione.agriturismoB):
+                usrDR.agriturismo += form.instance.rating
 
+            usrDR.save()
             user.save()
 
             print("numero di notifiche tot: " + user.first_name)

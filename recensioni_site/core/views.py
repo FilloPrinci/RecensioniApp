@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
-from forum.models import Sezione,Post
+from forum.models import Sezione,Post,UserDataReccomandation
 from django.views.generic.list import ListView
 from django.views.generic import DeleteView, UpdateView, DetailView, FormView
 from forum.views import visualizzaSezione
@@ -15,6 +15,32 @@ class HomeView(ListView):
 
 def homeView(request):
     listaSezione = Sezione.objects.all()
+
+
+    listaSezioneTag = listaSezione
+
+    usrDR = get_object_or_404(UserDataReccomandation, user=request.user)
+
+    arrayObj = [{"tag" : "hotel", "value" : usrDR.hotel}, {"tag" : "ristorante", "value" : usrDR.ristorante} ,{"tag" : "fastFood", "value" : usrDR.fastFood}, {"tag" : "casaVacanza", "value" : usrDR.casaVacanza}, {"tag" : "agriturismo", "value" : usrDR.agriturismo}]
+
+
+    print (max(node["value"] for node in arrayObj))
+    '''
+    valoreMax0 = ""
+    valoreMax1 = ""
+    valoreMax2 = ""
+    valoreMax3 = ""
+    valoreMax4 = ""
+
+    if (usrDR.hotel >= usrDR.ristorante and usrDR.hotel >= usrDR.fastFood and usrDR.hotel >= usrDR.casaVacanza and usrDR.hotel >= usrDR.agriturismo):
+        valoreMax0 = "hotel"
+        
+    else if (usrDR.ristorante >= usrDR.hotel and DR.ristorante >= usrDR.fastFood and usrDR.ristorante >= usrDR.casaVacanza and usrDR.ristorante >= usrDR.agriturismo):
+        valoreMax0 = "ristorante"
+    '''
+
+    print(arrayObj)
+
     for sezione in listaSezione:
         posts_discussione = Post.objects.filter(sezione=sezione)
 

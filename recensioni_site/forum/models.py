@@ -60,4 +60,12 @@ class Post(models.Model):
         verbose_name = "Post"
         verbose_name_plural = "Posts"
 
-    
+class UserDataReccomandation(models.Model):
+
+    hotel = models.PositiveIntegerField()
+    ristorante = models.PositiveIntegerField()
+    fastFood = models.PositiveIntegerField()
+    casaVacanza = models.PositiveIntegerField()
+    agriturismo = models.PositiveIntegerField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
