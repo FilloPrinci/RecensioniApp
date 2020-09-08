@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
+{% if listaSezioneTagFinaleSeria %}
 <div class="container-fluid">
 	<h1 class="text-center mb-3 text-white">Località consigliate per te</h1>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -14,7 +16,27 @@
 								href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a>
 						</h4>
 						<p class="card-text">{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}}</p>
-						<p class="card-text"><small class="text-muted">Rating: {{sezione.mediaRating}}</small></p>
+						{% if sezione.hotelB %}
+						<h5 style="color: #17a2b8;">hotel</h5>
+						{% endif %}
+						
+						{% if sezione.ristoranteB %}
+						<h5 style="color: #17a2b8;">ristorante</h5>
+						{% endif %}
+						
+						{% if sezione.fastFoodB %}
+						<h5 style="color: #17a2b8;">fastFood</h5>
+						{% endif %}
+						
+						{% if sezione.casaVacanzaB %}
+						<h5 style="color: #17a2b8;">casaVacanza</h5>
+						{% endif %}
+						
+						{% if sezione.agriturismoB %}
+						<h5 style="color: #17a2b8;">agriturismo</h5>
+						{% endif %}
+						
+						<h5>{{ sezione.tipo }}</h5>
 						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 					</div>
 				</div>
@@ -33,6 +55,9 @@
 </div>
 <br>
 <br>
+{% endif %}
+{% endif %}
+{% if not request.user.is_authenticated %}
 <div class="container-fluid">
 	<h1 class="text-center mb-3 text-white">Località più votate</h1>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -45,6 +70,27 @@
 					<div class="card-body">
 						<h4 class="card-title"><a style="color: #17a2b8;" href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a></h4>
 						<p class="card-text">{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}}</p>
+						{% if sezione.hotelB %}
+						<h5 style="color: #17a2b8;">hotel</h5>
+						{% endif %}
+						
+						{% if sezione.ristoranteB %}
+						<h5 style="color: #17a2b8;">ristorante</h5>
+						{% endif %}
+						
+						{% if sezione.fastFoodB %}
+						<h5 style="color: #17a2b8;">fastFood</h5>
+						{% endif %}
+						
+						{% if sezione.casaVacanzaB %}
+						<h5 style="color: #17a2b8;">casaVacanza</h5>
+						{% endif %}
+						
+						{% if sezione.agriturismoB %}
+						<h5 style="color: #17a2b8;">agriturismo</h5>
+						{% endif %}
+						
+						<h5>{{ sezione.tipo }}</h5>
 						<p class="card-text"><small class="text-muted">Rating: {{sezione.mediaRating}}</small></p>
 						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 					</div>
@@ -64,6 +110,7 @@
 </div>
 <br>
 <br>
+{% endif %}
 <div class="container">
 <h1 class="text-white">Tutte le località</h1>
 
@@ -134,6 +181,7 @@
 					}
 				}
 			});
+			
 
 			$(".carousel-item").removeClass("active")
 			$('.carousel-item:first').addClass('active');
