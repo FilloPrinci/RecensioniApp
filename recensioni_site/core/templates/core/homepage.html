@@ -2,6 +2,38 @@
 
 {% block content %}
 <div class="container-fluid">
+	<h1 class="text-center mb-3 text-white">Località consigliate per te</h1>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner row w-100 mx-auto">
+			{% for sezione in listaSezioneTagFinaleSeria %}
+			<div class="carousel-item col-md-4 active">
+				<div class="card">
+					<img class="card-img-top" src="{{ sezione.logo_sezione.url }}" alt="Card image cap">
+					<div class="card-body">
+						<h4 class="card-title"><a style="color: #17a2b8;"
+								href="{{ sezione.get_absolute_url}}"><strong>{{ sezione.nome_sezione }}</strong></a>
+						</h4>
+						<p class="card-text">{{sezione.indirizzo}} - {{sezione.citta}} - {{sezione.provincia}}</p>
+						<p class="card-text"><small class="text-muted">Rating: {{sezione.mediaRating}}</small></p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+</div>
+<br>
+<br>
+<div class="container-fluid">
 	<h1 class="text-center mb-3 text-white">Località più votate</h1>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner row w-100 mx-auto">
