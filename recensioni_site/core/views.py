@@ -20,49 +20,57 @@ def homeView(request):
 
     listaSezioneTag = listaSezione
 
-    usrDR = get_object_or_404(UserDataReccomandation, user=request.user)
+    if (request.user.is_authenticated):
+        usrDR = get_object_or_404(UserDataReccomandation, user=request.user)
 
-    arrayObj = [{"tag" : "hotel", "value" : usrDR.hotel}, {"tag" : "ristorante", "value" : usrDR.ristorante} ,{"tag" : "fastFood", "value" : usrDR.fastFood}, {"tag" : "casaVacanza", "value" : usrDR.casaVacanza}, {"tag" : "agriturismo", "value" : usrDR.agriturismo}]
+        arrayObj = [{"tag": "hotel", "value": usrDR.hotel}, {"tag": "ristorante", "value": usrDR.ristorante},
+                    {"tag": "fastFood", "value": usrDR.fastFood}, {"tag": "casaVacanza", "value": usrDR.casaVacanza},
+                    {"tag": "agriturismo", "value": usrDR.agriturismo}]
 
-    arrayObj.sort(key=lambda x: x["value"], reverse=True)
-    arrayObjOrdinato = sorted(arrayObj, key=lambda x: x["value"], reverse=True)
+        arrayObj.sort(key=lambda x: x["value"], reverse=True)
+        arrayObjOrdinato = sorted(arrayObj, key=lambda x: x["value"], reverse=True)
 
-    print("array ordinato: " + str(arrayObjOrdinato))
+        print("array ordinato: " + str(arrayObjOrdinato))
 
-    listaSezioneTagFinale = []
+        listaSezioneTagFinale = []
 
-    for element in arrayObj:
-        print(element)
-        if (element["tag"] == "hotel"):
-            print("cerco hotels")
-            listaSezioneTag = Sezione.objects.filter(hotelB="True")
+        for element in arrayObj:
+            print(element)
+            if (element["tag"] == "hotel"):
+                print("cerco hotels")
+                listaSezioneTag = Sezione.objects.filter(hotelB="True")
 
-        if (element["tag"] == "ristorante"):
-            print("cerco ristorante")
-            listaSezioneTag = Sezione.objects.filter(ristoranteB="True")
+            if (element["tag"] == "ristorante"):
+                print("cerco ristorante")
+                listaSezioneTag = Sezione.objects.filter(ristoranteB="True")
 
-        if (element["tag"] == "fastFood"):
-            print("cerco fastFood")
-            listaSezioneTag = Sezione.objects.filter(fastFoodB="True")
+            if (element["tag"] == "fastFood"):
+                print("cerco fastFood")
+                listaSezioneTag = Sezione.objects.filter(fastFoodB="True")
 
-        if (element["tag"] == "casaVacanza"):
-            print("cerco casaVacanza")
-            listaSezioneTag = Sezione.objects.filter(casaVacanzaB="True")
+            if (element["tag"] == "casaVacanza"):
+                print("cerco casaVacanza")
+                listaSezioneTag = Sezione.objects.filter(casaVacanzaB="True")
 
-        if (element["tag"] == "agriturismo"):
-            print("cerco agriturismo")
-            listaSezioneTag = Sezione.objects.filter(agriturismoB="True")
+            if (element["tag"] == "agriturismo"):
+                print("cerco agriturismo")
+                listaSezioneTag = Sezione.objects.filter(agriturismoB="True")
 
-        listaSezioneTagFinale = list(chain(listaSezioneTagFinale, listaSezioneTag))
-        print(listaSezioneTagFinale)
+            listaSezioneTagFinale = list(chain(listaSezioneTagFinale, listaSezioneTag))
+            print(listaSezioneTagFinale)
 
-    listaSezioneTagFinaleSeria = []
+        listaSezioneTagFinaleSeria = []
 
-    for x in listaSezioneTagFinale:
-        if x not in listaSezioneTagFinaleSeria:
-            listaSezioneTagFinaleSeria.append(x)
+        for x in listaSezioneTagFinale:
+            if x not in listaSezioneTagFinaleSeria:
+                listaSezioneTagFinaleSeria.append(x)
 
-    print("lista finale : " + str(listaSezioneTagFinaleSeria))
+        print("lista finale : " + str(listaSezioneTagFinaleSeria))
+    else:
+        listaSezioneTagFinaleSeria = []
+
+
+
 
     for sezione in listaSezione:
         posts_discussione = Post.objects.filter(sezione=sezione)
