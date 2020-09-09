@@ -1,0 +1,7 @@
+pip install django-crispy-forms
+pip install pillow
+pip install django-extensions
+pip install graphviz
+pip install pyparsing pydot
+pip install pydot-ng
+pip install pydot
